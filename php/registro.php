@@ -19,6 +19,10 @@
         $errores .= "El nombre debe tener un largo menor a 20 caracteres<br>";
         $usuarioValido = false;
     }
+    if (!preg_match("/^[a-zA-Z ]*$/",$apellido)){
+        $errores .= "El apellido debe estar compuesto unicamente por letras<br>"; 
+        $usuarioValido = false;
+    }
     if(empty($biografia)){
         $errores .= "La biografia no puede ser vacia<br>";
         $usuarioValido = false;
@@ -35,15 +39,27 @@
     
     if($usuarioValido){
         //se registra en BD
+        $mysqli = new mysqli('localhost', 'mathias', 'root');
+        if(!$mysqli){
+            die("No se pudo conectar con la BD".  mysql_error($mysqli));
+        }
+        
+        $mysqli->select_db("login");
+        $query = "INSERT INTO `login`.`usuarios` (`nombre`, `apellido`, `biografia`, `email`, `contrasenia`, `imagen`) VALUES ($nombre, $apellido, $biografia, $email, $password, NULL);";
+        if($mysqli->query($query)){
+?>
+            <h3>Se ha registrado correctamente!</h3>
+            <a href="../index.php">Volver</a>
+<?php            
+        }
     }
     else{
-        ?>
+?>
+        <p><?php echo $errores;?></p>
         <h3>Sus datos son incorrectos. Intentelo nuevamente.</h3>
         <a href="../index.php">Volver</a>
 <?php
-        
     }
-    
 ?>
 
 <form method="post" action="registro.php">
