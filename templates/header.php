@@ -6,5 +6,5 @@
     </head>
     <body>
         <header>
-            <h1>Login</h1>
+            <h1>Test Registro/Login</h1>
         </header>
