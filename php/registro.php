@@ -27,12 +27,12 @@
         $errores .= "La biografia no puede ser vacia<br>";
         $usuarioValido = false;
     }
-    /*
+    
     if(filter_var($email, FILTER_VALIDATE_EMAIL)==false){
         $errores .= "El mail ingresado no es valido<br>";
         $usuarioValido = false;
     }
-     */
+    
     if(strlen($password)<6){
         $errores .= "La contrasenia debe tener mas de 6 caracteres<br>";
         $usuarioValido = false;
@@ -41,22 +41,21 @@
     
     if($usuarioValido){
         //se registra en BD
-        $mysqli = mysqli_connect('localhost', 'root', 'root', 'login');
-        if(!$mysqli){
+        $conexionBD = mysqli_connect('localhost', 'root', 'root', 'login');
+        if(!$conexionBD){
             die("No se pudo conectar con la BD ".mysqli_connect_error());
         }
         
-        //$mysqli->select_db("login");
         $query = "INSERT INTO usuarios (nombre, apellido, biografia, email, contrasenia, imagen) VALUES ('$nombre', '$apellido', '$biografia', '$email', '$password', NULL);";
-        if(mysqli_query($mysqli, $query)){
+        if(mysqli_query($conexionBD, $query)){
 ?>
             <h3>Se ha registrado correctamente!</h3>
             <a href="../index.php">Volver</a>
 <?php  
-        mysqli_close($mysqli);
+        mysqli_close($conexionBD);
         }
         else{
-            die("No se pudo INSERTAR DATOS EN LA BD ".  mysqli_error($mysqli));
+            die("No se pudo INSERTAR DATOS EN LA BD ".  mysqli_error($conexionBD));
         }
     }
     else{

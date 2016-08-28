@@ -9,7 +9,7 @@
     <p>Biografia:</p>
     <textarea cols="10" rows="5" name="biografia" style="resize: none" required></textarea>
     <p>Mail:</p>
-    <input type="email" name="mail" required>
+    <input type="email" name="email" required>
     <p>Password:</p>
     <input type="password" name="password" required>
     <p>Imagen:</p>
