@@ -3,11 +3,15 @@
 
 <form>
     <a href="web/registro.php">
-        <input type="button" value="Registrarme" />
+        <input type="button" value="Registro" />
     </a>
     <a href="web/login.php">
-        <input type="button" value="Loguearme" />
+        <input type="button" value="Login" />
+    </a>
+    <a href="web/verUsuarios.php">
+        <input type="button" value="Ver usuarios registrados" />
     </a>
 </form> 
 <br>
 <?php require 'templates/footer.php';?>
+
