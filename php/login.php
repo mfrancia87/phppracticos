@@ -15,7 +15,11 @@ if(count(mysqli_num_rows($resultado))==1){
     $tupla = mysqli_fetch_array($resultado);
     if($tupla["email"]==$email){
         if($tupla["contrasenia"]==$password){
+            $nombre = $tupla["nombre"];
             echo "<h2>Login exitoso!!</h2>";
+            session_start();
+            $_SESSION["nombre"]=$nombre;
+            echo "<br>".$_SESSION["nombre"];
         }
         else{
             echo "<h2>Password incorrecto. Intentelo nuevamente</h2>";
