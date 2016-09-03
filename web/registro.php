@@ -1,7 +1,7 @@
 <?php require '../templates/header.php';?>
 
 <h2>Ingrese sus datos para registrarse:</h2>
-<form method="post" action="../php/registro.php">
+<form method="post" enctype="multipart/form-data" action="../php/registro.php">
     <p>Nombre:</p>
     <input type="text" name="nombre" required>
     <p>Apellido:</p>

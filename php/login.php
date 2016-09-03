@@ -19,6 +19,7 @@ if(count(mysqli_num_rows($resultado))==1){
             echo "<h2>Login exitoso!!</h2>";
             session_start();
             $_SESSION["nombre"]=$nombre;
+            $_SESSION["mail"]=$email;
             echo "<br>".$_SESSION["nombre"];
         }
         else{

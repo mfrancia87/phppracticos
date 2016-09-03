@@ -6,7 +6,11 @@
     $biografia = filter_input(INPUT_POST, "biografia");
     $email = filter_input(INPUT_POST, "email");
     $password = filter_input(INPUT_POST, "password");
+    
     //imagen
+    $nombre_archivo = $_FILES["imagen"]["name"];  
+    $tipo_archivo = $_FILES["imagen"]["type"];  
+    $tamano_archivo = $_FILES["imagen"]["size"]; 
     
     $errores = "Se detectaron los siguientes errores:<br>";
     $usuarioValido = true;
@@ -37,16 +41,20 @@
         $errores .= "La contrasenia debe tener mas de 6 caracteres<br>";
         $usuarioValido = false;
     }
+    
     //validacion imagen (puede ser null)
     
-    if($usuarioValido){
+    $nom_img= $email; 
+    $directorio = '../img/'; 
+    
+    if($usuarioValido && move_uploaded_file($_FILES['imagen']['tmp_name'],$directorio . "/" . $nom_img)){
         //se registra en BD
         $conexionBD = mysqli_connect('localhost', 'root', 'root', 'login');
         if(!$conexionBD){
             die("No se pudo conectar con la BD ".mysqli_connect_error());
         }
         
-        $query = "INSERT INTO usuarios (nombre, apellido, biografia, email, contrasenia, imagen) VALUES ('$nombre', '$apellido', '$biografia', '$email', '$password', NULL);";
+        $query = "INSERT INTO usuarios (nombre, apellido, biografia, email, contrasenia, ruta_imagen) VALUES ('$nombre', '$apellido', '$biografia', '$email', '$password', '$nom_img');";
         if(mysqli_query($conexionBD, $query)){
 ?>
             <h3>Se ha registrado correctamente!</h3>

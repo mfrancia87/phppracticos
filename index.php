@@ -1,7 +1,9 @@
 <?php require 'templates/header.php';
 session_start();
 if(isset($_SESSION["nombre"])){
+    $mail = ($_SESSION["mail"]);
     echo "<h2>Bienvenido ".$_SESSION["nombre"];
+    echo "<img class='img-circle' src='php/getImagen.php?email=".$mail."' width='50px' height='50px'>";
 }
 ?>
 <p>prueba Registro/Login</p>
